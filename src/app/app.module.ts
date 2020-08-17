@@ -7,6 +7,7 @@ import { appRoutes } from './routes/app.routes';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JsonFormComponent } from './routes/json-form/json-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,8 @@ import { JsonFormComponent } from './routes/json-form/json-form.component';
   imports: [
     BrowserModule,
     SpaModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes)
     
