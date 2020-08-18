@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-//import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import * as fld from 'src/app/routes/json-form/schema.json' 
 @Component({
   selector: 'app-json-form',
   templateUrl: './json-form.component.html',
@@ -31,7 +30,7 @@ export class JsonFormComponent implements OnInit {
     "type": "password",
     "label": "Password",
     "inputType": "text",
-    "name": "name",
+    "name": "password",
     "validations": [
       {
         "name": "required",
@@ -39,11 +38,29 @@ export class JsonFormComponent implements OnInit {
         "message": "Password Required"
       }
     ]
+  },
+  {
+    "type": "checkbox",
+    "label": "Angular",
+    "inputType": "checkbox",
+    "name": "checkbox",
+    "value":false,
+    "validations": []
+  },
+  {
+    "type": "select",
+    "label": "Skill",
+    "inputType": "select",
+    "name": "skill",
+    "options":["Junior","Middle","Senior"],
+    "validations": []
   }];
   dynamicForm: FormGroup;
-  
-  constructor() { 
-   const controls = {};
+ 
+  constructor() { }
+
+  ngOnInit(): void {
+    const controls = {};
     this.fields.forEach(res => {
       const validationsArray = [];
       res.validations.forEach(val => {
@@ -64,10 +81,6 @@ export class JsonFormComponent implements OnInit {
     this.dynamicForm = new FormGroup(
       controls
     );
-    
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit() {

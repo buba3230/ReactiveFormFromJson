@@ -1,13 +1,33 @@
 <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" novalidate>
 	<ng-container *ngFor="let controls of fields">
-		{{controls.label}}
-		<input [type]="controls.type" [formControlName]="controls.label"/>
+        
+        <span *ngIf="controls.type!='checkbox' && controls.type!='select'">
+          {{controls.label}}
+            <input [type]="controls.type" [formControlName]="controls.label"/>
+        </span>
+        <span *ngIf="controls.type=='checkbox'">
+          {{controls.label}}
+            <input [type]="controls.type" [formControlName]="controls.label" 
+            [checked]="controls.value" 
+            (change)="dynamicForm.controls[controls.label].setValue($event.target.checked)" />
+        
+        <span *ngIf="dynamicForm.controls['Angular'].value==false">
+          Click if you know what it is :)
+        </span>
+      </span>
+        <span *ngIf="controls.type=='select' && dynamicForm.controls['Angular'].value==true">
+          {{controls.label}}
+          <select class="custom-select" [formControlName]="controls.label">
+            <option value="" disabled>Choose your Skill</option>
+            <option *ngFor="let skill of controls.options; let i=index" [ngValue]="skill">{{controls.options[i]}}</option>
+         </select>
+      </span>
       <ng-container *ngFor="let validation of controls.validations">
-        <span *ngIf="dynamicForm.controls[controls.label].touched && dynamicForm.controls[controls.label].errors">
+        <span *ngIf="dynamicForm.controls[controls.label].touched && dynamicForm.controls[controls.label].errors && controls.type!='checkbox'">
           <p *ngIf="dynamicForm.controls[controls.label].errors[validation.name]">
             {{validation.message}}
           </p>
-        </span>
+        </span>            
     </ng-container>
     <br>
   </ng-container>
