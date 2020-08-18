@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class JsonFormComponent implements OnInit {
   name = 'Angular';
   fields = [{
+    "id" : "t1",
     "type": "input",
     "label": "Username",
     "inputType": "text",
@@ -27,6 +28,7 @@ export class JsonFormComponent implements OnInit {
       }
     ]
   }, {
+    "id": "p1",
     "type": "password",
     "label": "Password",
     "inputType": "text",
@@ -40,6 +42,7 @@ export class JsonFormComponent implements OnInit {
     ]
   },
   {
+    "id": "ch1",
     "type": "checkbox",
     "label": "Angular",
     "inputType": "checkbox",
@@ -48,6 +51,7 @@ export class JsonFormComponent implements OnInit {
     "validations": []
   },
   {
+    "id": "s1",
     "type": "select",
     "label": "Skill",
     "inputType": "select",
@@ -85,6 +89,7 @@ export class JsonFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.dynamicForm.value);
+    alert(JSON.stringify(this.dynamicForm.value)+"You can see an object in console...");
   }
   
 }
